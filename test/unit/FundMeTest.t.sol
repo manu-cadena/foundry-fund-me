@@ -15,7 +15,7 @@ contract FundMeTest is Test {
 
     function setUp() external {
         DeployFundMe deployFundMe = new DeployFundMe();
-        (fundMe, ) = deployFundMe.run();
+        (fundMe,) = deployFundMe.run();
         vm.deal(USER, STARTING_BALANCE);
     }
 
@@ -89,10 +89,7 @@ contract FundMeTest is Test {
         uint256 endingFundMeBalance = address(fundMe).balance;
 
         assertEq(endingFundMeBalance, 0);
-        assertEq(
-            startingOwnerBalance + startingFundMeBalance,
-            endingOwnerBalance
-        );
+        assertEq(startingOwnerBalance + startingFundMeBalance, endingOwnerBalance);
     }
 
     function testWithdrawFromMultipleFunders() public funded {
@@ -100,11 +97,7 @@ contract FundMeTest is Test {
         uint160 numberOfFunders = 10;
         uint160 startingFunderIndex = 1;
 
-        for (
-            uint160 i = startingFunderIndex;
-            i < numberOfFunders + startingFunderIndex;
-            i++
-        ) {
+        for (uint160 i = startingFunderIndex; i < numberOfFunders + startingFunderIndex; i++) {
             // vm.prank new address
             // vm.deal new address
             // address()
@@ -122,10 +115,7 @@ contract FundMeTest is Test {
 
         // Assert
         assertEq(address(fundMe).balance, 0);
-        assertEq(
-            startingOwnerBalance + startingFundMeBalance,
-            fundMe.getOwner().balance
-        );
+        assertEq(startingOwnerBalance + startingFundMeBalance, fundMe.getOwner().balance);
     }
 
     function testWithdrawFromMultipleFundersCheaper() public funded {
@@ -133,11 +123,7 @@ contract FundMeTest is Test {
         uint160 numberOfFunders = 10;
         uint160 startingFunderIndex = 1;
 
-        for (
-            uint160 i = startingFunderIndex;
-            i < numberOfFunders + startingFunderIndex;
-            i++
-        ) {
+        for (uint160 i = startingFunderIndex; i < numberOfFunders + startingFunderIndex; i++) {
             // vm.prank new address
             // vm.deal new address
             // address()
@@ -155,9 +141,6 @@ contract FundMeTest is Test {
 
         // Assert
         assertEq(address(fundMe).balance, 0);
-        assertEq(
-            startingOwnerBalance + startingFundMeBalance,
-            fundMe.getOwner().balance
-        );
+        assertEq(startingOwnerBalance + startingFundMeBalance, fundMe.getOwner().balance);
     }
 }
